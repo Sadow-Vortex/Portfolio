@@ -144,9 +144,21 @@ export default function Portfolio() {
 
                     <div className="flex gap-6">
 
-                        <a href="#projects" className="hover:text-blue-400">Projects</a>
+                        <a href="#education" className="hover:text-blue-400">
+                            Education
+                        </a>
 
-                        <a href="#contact" className="hover:text-blue-400">Contact</a>
+                        <a href="#skills" className="hover:text-blue-400">
+                            Skills
+                        </a>
+
+                        <a href="#projects" className="hover:text-blue-400">
+                            Projects
+                        </a>
+
+                        <a href="#contact" className="hover:text-blue-400">
+                            Contact
+                        </a>
 
                     </div>
 
@@ -252,8 +264,9 @@ export default function Portfolio() {
 
             </section>
 
+
             {/* MY BACKGROUND */}
-            <section className="max-w-7xl mx-auto px-6 py-20">
+            <section id="education" className="max-w-7xl mx-auto px-6 py-20">
 
                 <h2 className="text-3xl font-bold mb-12 text-center">
                     My Background
@@ -366,6 +379,7 @@ export default function Portfolio() {
 
             {/* SKILLS */}
             <motion.section
+                id="skills"
                 className="max-w-7xl mx-auto px-6 py-20 relative"
 
                 initial={{ opacity: 0 }}
