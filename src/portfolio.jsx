@@ -255,10 +255,22 @@ export default function Portfolio() {
                     className="flex justify-end"
                 >
 
-                    <img
-                        src={profile}
-                        className="w-[450px] md:w-[500px] ml-auto drop-shadow-[0_0_60px_rgba(59,130,246,0.8)]"
-                    />
+                    <div className="relative p-[3px] rounded-[40px]
+                    bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-700
+                    shadow-[0_0_40px_rgba(59,130,246,0.6)]">
+
+                        <div className="bg-black/40 backdrop-blur-md rounded-[36px] p-2">
+
+                            <img
+                                src={profile}
+                                className="w-[450px] md:w-[500px]
+                           rounded-[30px]
+                           object-cover"
+                            />
+
+                        </div>
+
+                    </div>
 
                 </motion.div>
 
@@ -665,7 +677,7 @@ export default function Portfolio() {
             {/* FOOTER */}
             <footer className="text-center py-10 text-gray-500">
 
-                © {new Date().getFullYear()} Rishi Prasad Manna
+                © {new Date().getFullYear()} Rushi Prasad Manna
 
             </footer>
 
