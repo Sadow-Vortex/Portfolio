@@ -101,7 +101,7 @@ export default function Portfolio() {
 
     return (
 
-        <div className="cosmic-bg text-white min-h-screen overflow-hidden relative z-10">
+        <div className="cosmic-bg text-white min-h-screen overflow-x-hidden relative z-10">
             <WaveBackground />
 
             {/* NAVBAR */}
