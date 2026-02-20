@@ -620,7 +620,7 @@ export default function Portfolio() {
                             </p>
 
                             <p className="mb-6 text-lg">
-                                🌍 India
+                                🌍 Odisha, India
                             </p>
 
                             <div className="flex gap-6 text-blue-400">
