@@ -9,29 +9,20 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --cream:#f7f3ec;
-  --warm:#f0e9dc;
-  --parchment:#e8dece;
-  --ink:#1c1a17;
-  --gold:#b8924a;
-  --gold2:#d4a85a;
-  --sage:#4a6650;
-  --muted:rgba(28,26,23,0.42);
-  --bdr:rgba(28,26,23,0.1);
-  --bdr-g:rgba(184,146,74,0.22);
+  --cream:#f7f3ec;--warm:#f0e9dc;--parchment:#e8dece;
+  --ink:#1c1a17;--gold:#b8924a;--gold2:#d4a85a;
+  --sage:#4a6650;--muted:rgba(28,26,23,0.42);
+  --bdr:rgba(28,26,23,0.1);--bdr-g:rgba(184,146,74,0.22);
 }
 html{scroll-behavior:smooth;}
 body{background:var(--cream);color:var(--ink);font-family:'Jost',sans-serif;cursor:none;overflow-x:hidden;}
-
 body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.022;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:220px;}
-
 #cur{position:fixed;z-index:9999;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
 #cur-ring{position:fixed;z-index:9998;width:34px;height:34px;border:1px solid rgba(184,146,74,.32);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .3s cubic-bezier(.34,1.56,.64,1),height .3s,border-color .3s;}
 body.hv #cur{width:0;}
 body.hv #cur-ring{width:48px;height:48px;background:rgba(184,146,74,.05);border-color:rgba(184,146,74,.55);}
-
 #bg{position:fixed;inset:0;z-index:0;}
 
 /* preloader */
@@ -59,27 +50,29 @@ nav.stuck{background:rgba(247,243,236,.95);backdrop-filter:blur(20px);padding:16
 .nav-cta{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;padding:9px 22px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;cursor:none;transition:background .22s,color .22s;opacity:0;animation:fadeIn .5s .6s forwards;}
 .nav-cta:hover{background:var(--gold);color:var(--cream);}
 
-/* HERO */
-#hero{position:relative;z-index:10;min-height:100vh;display:grid;grid-template-columns:1fr 400px;align-items:center;padding:120px 68px 80px;gap:72px;overflow:hidden;}
+/* HERO — overflow visible, generous top padding */
+#hero{position:relative;z-index:10;min-height:100vh;display:grid;grid-template-columns:1fr 400px;align-items:center;padding:148px 68px 80px;gap:72px;overflow:visible;}
 .orn{position:absolute;width:44px;height:44px;opacity:.35;}
 .orn svg{width:100%;height:100%;}
-.orn-tl{top:76px;left:68px;}
-.orn-tr{top:76px;right:68px;transform:scaleX(-1);}
-.orn-bl{bottom:56px;left:68px;transform:scaleY(-1);}
-.orn-br{bottom:56px;right:68px;transform:scale(-1);}
-.hero-left{display:flex;flex-direction:column;justify-content:center;}
+.orn-tl{top:76px;left:68px;} .orn-tr{top:76px;right:68px;transform:scaleX(-1);}
+.orn-bl{bottom:56px;left:68px;transform:scaleY(-1);} .orn-br{bottom:56px;right:68px;transform:scale(-1);}
+
+.hero-left{display:flex;flex-direction:column;justify-content:center;overflow:visible;}
 .hero-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px;opacity:0;animation:fadeUp .7s 2.7s forwards;}
 .eyebrow-line{width:32px;height:1px;background:var(--gold);}
 .eyebrow-txt{font-size:10px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;color:var(--gold);}
-.hero-h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(52px,7.5vw,100px);line-height:.91;letter-spacing:-.01em;margin-bottom:24px;}
-.hero-h1 .ln{overflow:hidden;display:block;}
-.hero-h1 .w{display:inline-block;opacity:0;transform:translateY(110%);}
+
+/* J FIX: overflow visible + translateY relative animation + line-height room */
+.hero-h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(52px,7.5vw,100px);line-height:1.05;letter-spacing:-.01em;margin-bottom:24px;overflow:visible;}
+.hero-h1 .ln{display:block;overflow:visible;padding:.06em 0;}
+.hero-h1 .w{display:inline-block;opacity:0;transform:translateY(1.15em);}
 .hero-h1 .w0{animation:wordUp .9s 2.8s cubic-bezier(.16,1,.3,1) forwards;}
 .hero-h1 .w1{animation:wordUp .9s 2.95s cubic-bezier(.16,1,.3,1) forwards;}
 .hero-h1 .w2{animation:wordUp .9s 3.1s cubic-bezier(.16,1,.3,1) forwards;}
 @keyframes wordUp{to{opacity:1;transform:translateY(0);}}
 .hero-h1 .italic{font-style:italic;color:var(--gold);}
 .hero-h1 .outline{-webkit-text-stroke:1.5px var(--ink);color:transparent;}
+
 .hero-rule{display:flex;align-items:center;gap:16px;margin-bottom:22px;opacity:0;animation:fadeUp .6s 3.2s forwards;}
 .hero-rule::before,.hero-rule::after{content:'';flex:1;height:1px;background:var(--bdr);}
 .hero-rule span{font-family:'IM Fell English',serif;font-style:italic;font-size:12px;color:var(--muted);white-space:nowrap;}
@@ -126,17 +119,15 @@ nav.stuck{background:rgba(247,243,236,.95);backdrop-filter:blur(20px);padding:16
 .mk-item.g::before{content:'✦  ';}
 @keyframes mkRun{to{transform:translateX(-50%);}}
 
-/* sections — all use this bg so education (dark) is always visible */
+/* sections */
 section.light{position:relative;z-index:10;background:var(--cream);}
 section.warm-bg{position:relative;z-index:10;background:var(--warm);}
 section.dark-bg{position:relative;z-index:10;background:var(--ink);color:var(--cream);}
-
 .sec-wrap{padding:110px 68px;}
 .sec-label{display:flex;align-items:center;gap:16px;margin-bottom:60px;}
 .sec-num{font-family:'IM Fell English',serif;font-style:italic;font-size:13px;color:var(--gold);letter-spacing:.05em;}
 .sec-rule{flex:1;height:1px;background:var(--bdr);}
 .sec-title{font-size:10px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;color:var(--muted);}
-/* dark section overrides */
 .dark-bg .sec-rule{background:rgba(184,146,74,.18);}
 .dark-bg .sec-title{color:rgba(247,243,236,.3);}
 
@@ -193,33 +184,17 @@ section.dark-bg{position:relative;z-index:10;background:var(--ink);color:var(--c
 .work-link{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;color:var(--ink);text-decoration:none;opacity:.32;transition:opacity .22s,gap .22s;cursor:none;}
 .work-link:hover{opacity:1;gap:16px;}
 
-/* education — DARK SECTION — explicit color overrides */
+/* education */
 .edu-list{display:flex;flex-direction:column;}
-.edu-item{
-  display:grid;grid-template-columns:170px 1fr auto;
-  align-items:start;gap:44px;
-  padding:36px 0;
-  border-bottom:1px solid rgba(184,146,74,.12);
-  transition:background .22s;cursor:none;
-}
+.edu-item{display:grid;grid-template-columns:170px 1fr auto;align-items:start;gap:44px;padding:36px 0;border-bottom:1px solid rgba(184,146,74,.12);transition:background .22s;cursor:none;}
 .edu-item:last-child{border-bottom:none;}
 .edu-item:hover{background:rgba(247,243,236,.025);}
-.edu-year{
-  font-size:11px;letter-spacing:.15em;text-transform:uppercase;
-  font-weight:500;color:rgba(184,146,74,.5);padding-top:4px;
-}
-.edu-degree{
-  font-family:'Playfair Display',serif;font-weight:500;
-  font-size:clamp(17px,2vw,22px);letter-spacing:-.01em;
-  color:var(--cream);margin-bottom:6px;line-height:1.25;
-}
+.edu-year{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:500;color:rgba(184,146,74,.5);padding-top:4px;}
+.edu-degree{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(17px,2vw,22px);letter-spacing:-.01em;color:var(--cream);margin-bottom:6px;line-height:1.25;}
 .edu-school{font-size:12.5px;color:rgba(247,243,236,.36);letter-spacing:.03em;}
-.edu-grade{
-  font-family:'Playfair Display',serif;font-size:26px;font-weight:500;
-  color:var(--gold);letter-spacing:-.01em;flex-shrink:0;
-}
+.edu-grade{font-family:'Playfair Display',serif;font-size:26px;font-weight:500;color:var(--gold);letter-spacing:-.01em;flex-shrink:0;}
 
-/* certifications */
+/* certs */
 .cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--bdr);}
 .cert-card{background:var(--warm);padding:36px;position:relative;overflow:hidden;transition:background .28s;border:1px solid var(--bdr);}
 .cert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .42s;}
@@ -228,7 +203,7 @@ section.dark-bg{position:relative;z-index:10;background:var(--ink);color:var(--c
 .cert-top{display:flex;align-items:start;justify-content:space-between;gap:16px;margin-bottom:20px;}
 .cert-mark{font-size:9px;letter-spacing:.24em;text-transform:uppercase;font-weight:500;color:var(--gold);display:flex;align-items:center;gap:8px;}
 .cert-mark::before{content:'✦';font-size:8px;}
-.cert-thumb{width:72px;height:52px;border:1px solid var(--bdr-g);overflow:hidden;flex-shrink:0;position:relative;background:var(--parchment);display:flex;align-items:center;justify-content:center;transition:transform .25s,border-color .25s;}
+.cert-thumb{width:72px;height:52px;border:1px solid var(--bdr-g);overflow:hidden;flex-shrink:0;background:var(--parchment);display:flex;align-items:center;justify-content:center;transition:transform .25s,border-color .25s;}
 .cert-thumb:hover{transform:scale(1.04);border-color:var(--gold);}
 .cert-thumb-icon{font-family:'Playfair Display',serif;font-style:italic;font-size:11px;color:var(--gold);text-align:center;line-height:1.4;padding:4px;}
 .cert-name{font-family:'Playfair Display',serif;font-size:21px;font-weight:500;margin-bottom:10px;letter-spacing:-.01em;}
@@ -276,7 +251,7 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
 
 @media(max-width:1100px){
   nav,nav.stuck{padding:16px 24px;}
-  #hero{grid-template-columns:1fr;padding:100px 24px 72px;gap:44px;}
+  #hero{grid-template-columns:1fr;padding:120px 24px 72px;gap:44px;}
   .hero-right{max-width:380px;margin:0 auto;}
   .sec-wrap{padding:80px 24px;}
   .about-grid,.ct-grid{grid-template-columns:1fr;gap:48px;}
@@ -362,17 +337,16 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
     <span class="mk-item g">Java</span><span class="mk-item">Spring Boot</span>
     <span class="mk-item g">REST API Design</span><span class="mk-item">React Native</span>
     <span class="mk-item g">MySQL</span><span class="mk-item">MongoDB</span>
-    <span class="mk-item g">Hibernate</span><span class="mk-item">MVC Architecture</span>
-    <span class="mk-item g">Cloud Computing</span><span class="mk-item">Three.js</span>
+    <span class="mk-item g">Hibernate</span><span class="mk-item">Spring MVC</span>
+    <span class="mk-item g">Cloud Computing</span><span class="mk-item">OOP</span>
     <span class="mk-item g">Java</span><span class="mk-item">Spring Boot</span>
     <span class="mk-item g">REST API Design</span><span class="mk-item">React Native</span>
     <span class="mk-item g">MySQL</span><span class="mk-item">MongoDB</span>
-    <span class="mk-item g">Hibernate</span><span class="mk-item">MVC Architecture</span>
-    <span class="mk-item g">Cloud Computing</span><span class="mk-item">Three.js</span>
+    <span class="mk-item g">Hibernate</span><span class="mk-item">Spring MVC</span>
+    <span class="mk-item g">Cloud Computing</span><span class="mk-item">OOP</span>
   </div>
 </div>
 
-<!-- ABOUT -->
 <section id="about" class="light">
   <div class="sec-wrap">
     <div class="sec-label reveal"><span class="sec-num">I.</span><span class="sec-rule"></span><span class="sec-title">About</span></div>
@@ -402,22 +376,20 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
   </div>
 </section>
 
-<!-- SKILLS -->
 <section id="skills" class="warm-bg">
   <div class="sec-wrap">
     <div class="sec-label reveal"><span class="sec-num">II.</span><span class="sec-rule"></span><span class="sec-title">Technical Skills</span></div>
     <div class="skills-grid reveal">
       <div class="skill-block"><div class="skill-cat">Core</div><div class="skill-title">Languages</div><div class="chips"><span class="chip">Java</span><span class="chip">Python</span><span class="chip">C</span><span class="chip">JavaScript</span><span class="chip">SQL</span></div></div>
       <div class="skill-block"><div class="skill-cat">Server-side</div><div class="skill-title">Backend</div><div class="chips"><span class="chip">Spring Boot</span><span class="chip">Hibernate</span><span class="chip">Spring MVC</span><span class="chip">REST APIs</span><span class="chip">OOP</span></div></div>
-      <div class="skill-block"><div class="skill-cat">Client-side</div><div class="skill-title">Frontend &amp; Mobile</div><div class="chips"><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">Three.js</span><span class="chip">HTML</span><span class="chip">CSS</span></div></div>
+      <div class="skill-block"><div class="skill-cat">Client-side</div><div class="skill-title">Frontend &amp; Mobile</div><div class="chips"><span class="chip">React Native</span><span class="chip">Expo</span><span class="chip">HTML</span><span class="chip">CSS</span></div></div>
       <div class="skill-block"><div class="skill-cat">Storage</div><div class="skill-title">Databases</div><div class="chips"><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">Schema Design</span><span class="chip">Normalisation</span></div></div>
       <div class="skill-block"><div class="skill-cat">Workflow</div><div class="skill-title">Tools</div><div class="chips"><span class="chip">IntelliJ IDEA</span><span class="chip">WebStorm</span><span class="chip">Git / GitHub</span><span class="chip">Vercel</span></div></div>
-      <div class="skill-block"><div class="skill-cat">Patterns</div><div class="skill-title">Architecture</div><div class="chips"><span class="chip">MVC</span><span class="chip">CORS Config</span><span class="chip">API Security</span><span class="chip">Cloud Computing</span></div></div>
+      <div class="skill-block"><div class="skill-cat">Cloud &amp; Security</div><div class="skill-title">Infra &amp; API</div><div class="chips"><span class="chip">Cloud Computing</span><span class="chip">CORS Config</span><span class="chip">API Security</span><span class="chip">Spring Security</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- WORK -->
 <section id="work" class="light">
   <div class="sec-wrap">
     <div class="sec-label reveal"><span class="sec-num">III.</span><span class="sec-rule"></span><span class="sec-title">Selected Work</span></div>
@@ -425,12 +397,7 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
       <div class="work-item reveal">
         <div class="work-num">I</div>
         <div>
-          <div class="work-tags">
-            <span class="work-tag ft">Featured Project</span>
-            <span class="work-tag">Full Stack</span>
-            <span class="work-tag">Mobile App</span>
-            <span class="work-tag">Java · Spring Boot</span>
-          </div>
+          <div class="work-tags"><span class="work-tag ft">Featured Project</span><span class="work-tag">Full Stack</span><span class="work-tag">Mobile App</span><span class="work-tag">Java · Spring Boot</span></div>
           <h3 class="work-title">Kisan Seva</h3>
           <p class="work-desc">A full-stack agricultural marketplace mobile application enabling farmers to post, discover, and manage advertisements — with map-based location selection, image uploads, and category filtering across Android &amp; iOS.</p>
           <ul class="work-bul">
@@ -441,12 +408,7 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
             <li>CORS &amp; static resource handling via Spring WebConfig for secure API access</li>
             <li>Full CRUD across Android and iOS via React Native / Expo</li>
           </ul>
-          <div class="work-stack">
-            <span class="work-pill">Java</span><span class="work-pill">Spring Boot</span>
-            <span class="work-pill">MySQL</span><span class="work-pill">React Native</span>
-            <span class="work-pill">Expo</span><span class="work-pill">REST API</span>
-            <span class="work-pill">MVC Architecture</span>
-          </div>
+          <div class="work-stack"><span class="work-pill">Java</span><span class="work-pill">Spring Boot</span><span class="work-pill">MySQL</span><span class="work-pill">React Native</span><span class="work-pill">Expo</span><span class="work-pill">REST API</span></div>
           <a href="https://github.com/Sadow-Vortex" target="_blank" class="work-link">View on GitHub →</a>
         </div>
       </div>
@@ -454,70 +416,30 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
   </div>
 </section>
 
-<!-- EDUCATION — dark bg, fully explicit colors -->
 <section id="education" class="dark-bg">
   <div class="sec-wrap">
-    <div class="sec-label reveal">
-      <span class="sec-num">IV.</span>
-      <span class="sec-rule"></span>
-      <span class="sec-title">Education</span>
-    </div>
+    <div class="sec-label reveal"><span class="sec-num">IV.</span><span class="sec-rule"></span><span class="sec-title">Education</span></div>
     <div class="edu-list">
-      <div class="edu-item reveal">
-        <span class="edu-year">2024 – Present</span>
-        <div>
-          <div class="edu-degree">Master of Computer Applications (MCA)</div>
-          <div class="edu-school">Kalinga Institute of Industrial Technology · Bhubaneswar</div>
-        </div>
-        <span class="edu-grade">8.03</span>
-      </div>
-      <div class="edu-item reveal d1">
-        <span class="edu-year">2021 – 2024</span>
-        <div>
-          <div class="edu-degree">B.Sc Computer Science</div>
-          <div class="edu-school">M.P.C Autonomous College · Balasore</div>
-        </div>
-        <span class="edu-grade">7.66</span>
-      </div>
-      <div class="edu-item reveal d2">
-        <span class="edu-year">2019 – 2021</span>
-        <div>
-          <div class="edu-degree">CHSE Science (Class XII)</div>
-          <div class="edu-school">Balasore Higher Secondary School</div>
-        </div>
-        <span class="edu-grade">80%</span>
-      </div>
-      <div class="edu-item reveal d3">
-        <span class="edu-year">2009 – 2019</span>
-        <div>
-          <div class="edu-degree">BSE (Class X)</div>
-          <div class="edu-school">Jaleswar Nodal High School</div>
-        </div>
-        <span class="edu-grade">79%</span>
-      </div>
+      <div class="edu-item reveal"><span class="edu-year">2024 – Present</span><div><div class="edu-degree">Master of Computer Applications (MCA)</div><div class="edu-school">Kalinga Institute of Industrial Technology · Bhubaneswar</div></div><span class="edu-grade">8.03</span></div>
+      <div class="edu-item reveal d1"><span class="edu-year">2021 – 2024</span><div><div class="edu-degree">B.Sc Computer Science</div><div class="edu-school">M.P.C Autonomous College · Balasore</div></div><span class="edu-grade">7.66</span></div>
+      <div class="edu-item reveal d2"><span class="edu-year">2019 – 2021</span><div><div class="edu-degree">CHSE Science (Class XII)</div><div class="edu-school">Balasore Higher Secondary School</div></div><span class="edu-grade">80%</span></div>
+      <div class="edu-item reveal d3"><span class="edu-year">2009 – 2019</span><div><div class="edu-degree">BSE (Class X)</div><div class="edu-school">Jaleswar Nodal High School</div></div><span class="edu-grade">79%</span></div>
     </div>
   </div>
 </section>
 
-<!-- CERTIFICATIONS -->
 <section id="certs" class="warm-bg">
   <div class="sec-wrap">
     <div class="sec-label reveal"><span class="sec-num">V.</span><span class="sec-rule"></span><span class="sec-title">Certifications</span></div>
     <div class="cert-grid reveal">
       <div class="cert-card">
-        <div class="cert-top">
-          <div class="cert-mark">Certified</div>
-          <a href="https://drive.google.com/file/d/14exbHq4tLTRjpnAF35GHlF00OZ0NYwRG/view?usp=sharing" target="_blank" class="cert-thumb"><div class="cert-thumb-icon">View<br/>Cert ↗</div></a>
-        </div>
+        <div class="cert-top"><div class="cert-mark">Certified</div><a href="https://drive.google.com/file/d/14exbHq4tLTRjpnAF35GHlF00OZ0NYwRG/view?usp=sharing" target="_blank" class="cert-thumb"><div class="cert-thumb-icon">View<br/>Cert ↗</div></a></div>
         <div class="cert-name">Python Workshop</div>
         <div class="cert-desc">Programming fundamentals, data structures, file handling, and scripting with Python. Covers OOP concepts and practical application development.</div>
         <a href="https://drive.google.com/file/d/14exbHq4tLTRjpnAF35GHlF00OZ0NYwRG/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
       </div>
       <div class="cert-card">
-        <div class="cert-top">
-          <div class="cert-mark">Certified</div>
-          <a href="https://drive.google.com/file/d/1ajbUNhxkhBzPR2za561k9RtmWQpYLOMH/view?usp=sharing" target="_blank" class="cert-thumb"><div class="cert-thumb-icon">View<br/>Cert ↗</div></a>
-        </div>
+        <div class="cert-top"><div class="cert-mark">Certified</div><a href="https://drive.google.com/file/d/1ajbUNhxkhBzPR2za561k9RtmWQpYLOMH/view?usp=sharing" target="_blank" class="cert-thumb"><div class="cert-thumb-icon">View<br/>Cert ↗</div></a></div>
         <div class="cert-name">Cloud Computing</div>
         <div class="cert-desc">Cloud architecture principles, deployment models (IaaS, PaaS, SaaS), cloud services, virtualisation, and infrastructure management.</div>
         <a href="https://drive.google.com/file/d/1ajbUNhxkhBzPR2za561k9RtmWQpYLOMH/view?usp=sharing" target="_blank" class="cert-link">View Certificate →</a>
@@ -526,7 +448,6 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
   </div>
 </section>
 
-<!-- ACHIEVEMENTS -->
 <section id="achievements" class="light">
   <div class="sec-wrap">
     <div class="sec-label reveal"><span class="sec-num">VI.</span><span class="sec-rule"></span><span class="sec-title">Achievements</span></div>
@@ -538,7 +459,6 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" class="warm-bg">
   <div class="ct-wm">Contact</div>
   <div class="sec-wrap">
@@ -566,225 +486,252 @@ footer{position:relative;z-index:10;padding:24px 68px;border-top:1px solid var(-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-/* preloader */
+/* ── PRELOADER ─────────────────────────────────── */
 const ldr=document.getElementById('loader'),ldp=document.getElementById('ld-pct');
 const msgs=['Loading','Preparing','Almost ready','Welcome'];
 let pv=0;
-const pi=setInterval(()=>{pv+=Math.random()*10+4;if(pv>=100){pv=100;clearInterval(pi);}ldp.textContent=msgs[Math.floor(pv/26)]||msgs[3];if(pv===100)setTimeout(()=>ldr.classList.add('out'),500);},130);
+const pi=setInterval(function(){
+  pv+=Math.random()*10+4;
+  if(pv>=100){pv=100;clearInterval(pi);}
+  ldp.textContent=msgs[Math.floor(pv/26)]||msgs[3];
+  if(pv===100)setTimeout(function(){ldr.classList.add('out');},500);
+},130);
 
-/* cursor */
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+/* ── CURSOR ────────────────────────────────────── */
+const cur=document.getElementById('cur'),ringEl=document.getElementById('cur-ring');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function tr(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tr);})();
-document.querySelectorAll('a,button,.chip,.work-item,.edu-item,.cert-card,.ach-item,.clink,.kpi,.pstat,.skill-block,.cert-link,.cert-thumb').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('hv'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('hv'));
+document.addEventListener('mousemove',function(e){
+  mx=e.clientX;my=e.clientY;
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+});
+(function tr(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  ringEl.style.left=rx+'px';ringEl.style.top=ry+'px';
+  requestAnimationFrame(tr);
+})();
+document.querySelectorAll('a,button,.chip,.work-item,.edu-item,.cert-card,.ach-item,.clink,.kpi,.pstat,.skill-block,.cert-link,.cert-thumb').forEach(function(el){
+  el.addEventListener('mouseenter',function(){document.body.classList.add('hv');});
+  el.addEventListener('mouseleave',function(){document.body.classList.remove('hv');});
 });
 
-/* nav */
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('stuck',scrollY>80),{passive:true});
+/* ── NAV ───────────────────────────────────────── */
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('stuck',window.scrollY>80);
+},{passive:true});
 
-/* ── THREE.JS — KUNAI (throwing knife) ── */
-const canvas=document.getElementById('bg');
-const R=new THREE.WebGLRenderer({canvas,antialias:true});
-R.setPixelRatio(Math.min(devicePixelRatio,2));
-R.setSize(innerWidth,innerHeight);
-R.setClearColor(0xf7f3ec,1);
-R.toneMapping=THREE.ACESFilmicToneMapping;
-R.toneMappingExposure=1.06;
+/* ── THREE.JS SCENE ────────────────────────────── */
+var canvas=document.getElementById('bg');
+var renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:true});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+renderer.setSize(window.innerWidth,window.innerHeight);
+renderer.setClearColor(0xf7f3ec,1);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.06;
 
-const S=new THREE.Scene();
-S.fog=new THREE.Fog(0xf7f3ec,14,32);
-const C=new THREE.PerspectiveCamera(52,innerWidth/innerHeight,.1,60);
-C.position.z=7;
+var scene=new THREE.Scene();
+scene.fog=new THREE.Fog(0xf7f3ec,14,32);
+var camera=new THREE.PerspectiveCamera(52,window.innerWidth/window.innerHeight,.1,60);
+camera.position.z=7;
 
-/* warm studio lighting */
-S.add(new THREE.AmbientLight(0xfff5e8,.65));
-const sun=new THREE.DirectionalLight(0xffe0a0,1.1);sun.position.set(6,9,5);S.add(sun);
-const fill=new THREE.DirectionalLight(0xc8a060,.4);fill.position.set(-5,-3,4);S.add(fill);
-const ptA=new THREE.PointLight(0xd4a060,1.8,14);
-const ptB=new THREE.PointLight(0xa07840,.8,10);
-S.add(ptA,ptB);
+/* Lights */
+scene.add(new THREE.AmbientLight(0xfff5e8,.65));
+var sun=new THREE.DirectionalLight(0xffe0a0,1.1);
+sun.position.set(6,9,5);
+scene.add(sun);
+var fillLight=new THREE.DirectionalLight(0xc8a060,.4);
+fillLight.position.set(-5,-3,4);
+scene.add(fillLight);
+var ptA=new THREE.PointLight(0xd4a060,1.8,14);
+var ptB=new THREE.PointLight(0xa07840,.8,10);
+scene.add(ptA,ptB);
 
-/* ── BUILD KUNAI from geometry ──
-   A kunai has:
-   1. Blade — diamond/leaf shaped, tapered to a point
-   2. Handle — cylindrical grip
-   3. Ring — torus at the butt
-   4. Wrap — thin cylinders simulating cord
+/* Shared material — dark polished ink-black */
+var darkMat=new THREE.MeshPhysicalMaterial({
+  color:0x1c1a17,
+  metalness:.82,roughness:.08,
+  clearcoat:1.0,clearcoatRoughness:.05,
+  emissive:0x080604,emissiveIntensity:.06
+});
+
+/* ── GEM / DIAMOND shape ──
+   Two pyramids base-to-base = gem.
+   OctahedronGeometry is exactly this shape.
+   We scale Y to make it taller (more gem-like).
 */
-const kunaiGroup = new THREE.Group();
-
-// Blade — custom geometry: elongated diamond profile extruded
-// We build it as a CylinderGeometry squashed, or use a custom shape
-// Blade: narrow at tip, wide in middle, narrow at base where handle starts
-const bladeShape = new THREE.Shape();
-bladeShape.moveTo(0, 1.8);          // tip (top)
-bladeShape.lineTo(0.18, 1.0);       // upper right shoulder
-bladeShape.lineTo(0.14, 0.0);       // lower right at handle junction
-bladeShape.lineTo(0, -0.05);        // center base
-bladeShape.lineTo(-0.14, 0.0);      // lower left at handle junction
-bladeShape.lineTo(-0.18, 1.0);      // upper left shoulder
-bladeShape.lineTo(0, 1.8);
-
-const bladeExtSettings = {
-  depth: 0.06,
-  bevelEnabled: true,
-  bevelThickness: 0.03,
-  bevelSize: 0.025,
-  bevelSegments: 3,
-};
-const bladeGeo = new THREE.ExtrudeGeometry(bladeShape, bladeExtSettings);
-bladeGeo.translate(0, 0, -0.03); // center depth
-const bladeMat = new THREE.MeshPhysicalMaterial({
-  color: 0x6a7a8a,
-  metalness: 0.95,
-  roughness: 0.08,
-  clearcoat: 1.0,
-  clearcoatRoughness: 0.05,
-});
-const blade = new THREE.Mesh(bladeGeo, bladeMat);
-kunaiGroup.add(blade);
-
-// Edge line detail — thin ridge down the center of blade
-const ridgeGeo = new THREE.BoxGeometry(0.015, 1.85, 0.015);
-const ridgeMat = new THREE.MeshPhysicalMaterial({color:0x9ab0c0,metalness:1,roughness:.04});
-const ridge = new THREE.Mesh(ridgeGeo, ridgeMat);
-ridge.position.set(0, 0.9, 0);
-kunaiGroup.add(ridge);
-
-// Handle — octagonal grip
-const handleGeo = new THREE.CylinderGeometry(0.095, 0.11, 0.85, 8);
-const handleMat = new THREE.MeshPhysicalMaterial({
-  color: 0x2c2420,
-  metalness: 0.15,
-  roughness: 0.85,
-});
-const handle = new THREE.Mesh(handleGeo, handleMat);
-handle.position.set(0, -0.525, 0);
-kunaiGroup.add(handle);
-
-// Handle wrap — 5 cord bands
-const wrapMat = new THREE.MeshPhysicalMaterial({color:0x8b6a3a,metalness:.1,roughness:.9});
-for(let i=0; i<5; i++){
-  const wrapGeo = new THREE.CylinderGeometry(0.108, 0.108, 0.05, 8);
-  const wrap = new THREE.Mesh(wrapGeo, wrapMat);
-  wrap.position.set(0, -0.18 - i * 0.14, 0);
-  kunaiGroup.add(wrap);
+function makeGem(topH,botH,radius){
+  /* build custom geometry: top cone + bottom cone */
+  var verts=[];
+  var faces=[];
+  var sides=8;
+  /* crown tip */
+  verts.push(new THREE.Vector3(0,topH,0));
+  /* girdle ring */
+  for(var i=0;i<sides;i++){
+    var a=i/sides*Math.PI*2;
+    verts.push(new THREE.Vector3(Math.cos(a)*radius,0,Math.sin(a)*radius));
+  }
+  /* pavilion tip */
+  verts.push(new THREE.Vector3(0,-botH,0));
+  var geo=new THREE.BufferGeometry();
+  var positions=[];
+  var normals=[];
+  function addTri(a,b,c){
+    var vA=verts[a],vB=verts[b],vC=verts[c];
+    var ab=new THREE.Vector3().subVectors(vB,vA);
+    var ac=new THREE.Vector3().subVectors(vC,vA);
+    var n=new THREE.Vector3().crossVectors(ab,ac).normalize();
+    [vA,vB,vC].forEach(function(v){
+      positions.push(v.x,v.y,v.z);
+      normals.push(n.x,n.y,n.z);
+    });
+  }
+  for(var i=0;i<sides;i++){
+    var next=(i+1)%sides;
+    addTri(0,i+1,next+1);           /* crown faces */
+    addTri(sides+1,next+1,i+1);     /* pavilion faces */
+  }
+  geo.setAttribute('position',new THREE.Float32BufferAttribute(positions,3));
+  geo.setAttribute('normal',new THREE.Float32BufferAttribute(normals,3));
+  return geo;
 }
 
-// Guard — thin disk between blade and handle
-const guardGeo = new THREE.CylinderGeometry(0.18, 0.18, 0.04, 12);
-const guardMat = new THREE.MeshPhysicalMaterial({color:0x4a3820,metalness:.6,roughness:.35});
-const guard = new THREE.Mesh(guardGeo, guardMat);
-guard.position.set(0, -0.05, 0);
-kunaiGroup.add(guard);
+/* Main centre gem */
+var mainGemGeo=makeGem(0.9,1.1,0.7);
+var mainGem=new THREE.Mesh(mainGemGeo,darkMat);
+mainGem.position.set(2.8,0.2,-1.0);
+mainGem.rotation.set(0,0.3,0.06);
+scene.add(mainGem);
 
-// Ring at base — torus
-const ringGeo = new THREE.TorusGeometry(0.14, 0.03, 8, 24);
-const ringMat = new THREE.MeshPhysicalMaterial({
-  color: 0x7a8a9a,
-  metalness: 0.9,
-  roughness: 0.1,
-  clearcoat: .8,
-});
-const ring3d = new THREE.Mesh(ringGeo, ringMat);
-ring3d.position.set(0, -0.96, 0);
-ring3d.rotation.x = Math.PI / 2;
-kunaiGroup.add(ring3d);
+/* Wireframe halo around main gem */
+var haloGeo=makeGem(1.02,1.24,0.82);
+var haloMesh=new THREE.Mesh(haloGeo,new THREE.MeshBasicMaterial({
+  color:0xb8924a,wireframe:true,opacity:.06,transparent:true
+}));
+haloMesh.position.copy(mainGem.position);
+haloMesh.rotation.copy(mainGem.rotation);
+scene.add(haloMesh);
 
-// Position kunai in scene — tilted at elegant angle
-kunaiGroup.position.set(2.8, 0, -1.0);
-kunaiGroup.rotation.z = -0.35;   // slight tilt
-kunaiGroup.rotation.y = 0.3;     // slight turn to catch light
-kunaiGroup.scale.setScalar(1.1);
-S.add(kunaiGroup);
-
-/* Floating smaller kunai in background */
-const miniKunais = [];
-const miniPositions = [
-  [-3.8, 1.6, -4.0, 0.38, 0.6, 0.8],
-  [-2.2,-2.4, -5.0, 0.26, 0.4, 1.1],
-  [ 4.2,-1.6, -4.5, 0.30, 0.7, -0.5],
-  [-0.4, 3.2, -5.5, 0.22, 0.5, 1.4],
-  [ 4.8, 2.8, -5.8, 0.20, 0.3, -0.9],
+/* ── FLOATING GEMS — mix of sizes/orientations ── */
+var floaters=[];
+var floatDefs=[
+  [2.8, -3.8,  1.7, -4.0, 0,  0.6,  0.4],
+  [2.8, -2.3, -2.4, -5.0, 0,  0.3, -0.8],
+  [2.8,  4.2, -1.7, -4.5, 0,  0.7,  0.2],
+  [2.0, -0.4,  3.3, -5.5, 0,  0.5,  1.2],
+  [2.0,  4.7,  2.7, -5.8, 0,  0.4, -0.5],
+  [2.0, -1.8, -3.2, -5.2, 0,  0.8,  0.9],
+  [1.6, -4.2, -0.8, -4.8, 0,  0.3, -0.3],
+  [1.6,  3.4,  1.4, -5.0, 0,  0.6,  0.7],
 ];
-miniPositions.forEach(([x,y,z,sc,rx2,rz2])=>{
-  const mg = new THREE.Group();
-  // mini blade
-  const mbGeo = new THREE.ExtrudeGeometry(bladeShape, {...bladeExtSettings,depth:.04,bevelThickness:.02,bevelSize:.015});
-  mbGeo.translate(0,0,-.02);
-  const mb = new THREE.Mesh(mbGeo, bladeMat);
-  mg.add(mb);
-  // mini handle
-  const mh = new THREE.Mesh(new THREE.CylinderGeometry(.08,.09,.7,8),handleMat);
-  mh.position.set(0,-.45,0); mg.add(mh);
-  // mini ring
-  const mr = new THREE.Mesh(new THREE.TorusGeometry(.11,.025,6,16),ringMat);
-  mr.position.set(0,-.82,0); mr.rotation.x=Math.PI/2; mg.add(mr);
-  mg.position.set(x,y,z);
-  mg.scale.setScalar(sc);
-  mg.rotation.set(rx2,.2,rz2);
-  mg.userData={ox:rx2,oy:.2,oz:rz2,sp:.25+Math.random()*.5};
-  S.add(mg); miniKunais.push(mg);
+floatDefs.forEach(function(d){
+  var sides=d[0];
+  var x=d[1],y=d[2],z=d[3];
+  var rx=d[4],ry2=d[5],rz=d[6];
+  var sc=0.18+Math.random()*0.16;
+  var g=makeGem(0.9*sc+0.1,1.1*sc+0.1,0.7*sc+0.05);
+  var m=new THREE.Mesh(g,darkMat.clone());
+  m.position.set(x,y,z);
+  m.rotation.set(rx,ry2,rz);
+  m.userData.sp=0.18+Math.random()*0.38;
+  m.userData.yo=y;
+  scene.add(m);
+  floaters.push(m);
 });
 
 /* Warm dust particles */
-const pN=800,pp=new Float32Array(pN*3),pc=new Float32Array(pN*3);
-for(let i=0;i<pN;i++){
-  pp[i*3]=(Math.random()-.5)*22;pp[i*3+1]=(Math.random()-.5)*22;pp[i*3+2]=(Math.random()-.5)*14-2;
-  const t=Math.random();pc[i*3]=t>.4?.7:.56;pc[i*3+1]=t>.4?.53:.43;pc[i*3+2]=t>.4?.25:.23;
+var pN=800;
+var pPos=new Float32Array(pN*3);
+var pCol=new Float32Array(pN*3);
+for(var i=0;i<pN;i++){
+  pPos[i*3]=(Math.random()-.5)*22;
+  pPos[i*3+1]=(Math.random()-.5)*22;
+  pPos[i*3+2]=(Math.random()-.5)*14-2;
+  var t=Math.random();
+  pCol[i*3]=t>.4?.7:.56;
+  pCol[i*3+1]=t>.4?.53:.43;
+  pCol[i*3+2]=t>.4?.25:.23;
 }
-const pg=new THREE.BufferGeometry();
-pg.setAttribute('position',new THREE.BufferAttribute(pp,3));
-pg.setAttribute('color',new THREE.BufferAttribute(pc,3));
-S.add(new THREE.Points(pg,new THREE.PointsMaterial({size:.013,vertexColors:true,transparent:true,opacity:.14,sizeAttenuation:true})));
+var pGeo=new THREE.BufferGeometry();
+pGeo.setAttribute('position',new THREE.BufferAttribute(pPos,3));
+pGeo.setAttribute('color',new THREE.BufferAttribute(pCol,3));
+scene.add(new THREE.Points(pGeo,new THREE.PointsMaterial({
+  size:.013,vertexColors:true,transparent:true,opacity:.14,sizeAttenuation:true
+})));
 
-let cX=0,cY=0,dX=0,dY=0,sY=0;
-document.addEventListener('mousemove',e=>{dX=(e.clientX/innerWidth-.5)*2;dY=(e.clientY/innerHeight-.5)*2;},{passive:true});
-window.addEventListener('scroll',()=>{sY=scrollY;},{passive:true});
-window.addEventListener('resize',()=>{C.aspect=innerWidth/innerHeight;C.updateProjectionMatrix();R.setSize(innerWidth,innerHeight);},{passive:true});
+/* Camera parallax */
+var camX=0,camY=0,dX=0,dY=0,scrollY=0;
+document.addEventListener('mousemove',function(e){
+  dX=(e.clientX/window.innerWidth-.5)*2;
+  dY=(e.clientY/window.innerHeight-.5)*2;
+},{passive:true});
+window.addEventListener('scroll',function(){scrollY=window.scrollY;},{passive:true});
+window.addEventListener('resize',function(){
+  camera.aspect=window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth,window.innerHeight);
+},{passive:true});
 
-const clk=new THREE.Clock();
+var clock=new THREE.Clock();
 (function loop(){
   requestAnimationFrame(loop);
-  const t=clk.getElapsedTime();
+  var t=clock.getElapsedTime();
 
-  cX+=(dX*.42-cX)*.048;cY+=(-dY*.28-cY)*.048;
-  C.position.x=cX;C.position.y=cY-sY*.00055;C.lookAt(0,0,0);
+  camX+=(dX*.42-camX)*.048;
+  camY+=(-dY*.28-camY)*.048;
+  camera.position.x=camX;
+  camera.position.y=camY-scrollY*.00055;
+  camera.lookAt(0,0,0);
 
-  /* Main kunai — very slow dignified rotation + gentle float */
-  kunaiGroup.rotation.y = 0.3 + Math.sin(t*.18)*.12;
-  kunaiGroup.rotation.x = Math.sin(t*.12)*.04;
-  kunaiGroup.position.y = Math.sin(t*.55)*.08;
+  /* Main gem: slow dignified rotation + float */
+  mainGem.rotation.y=0.3+Math.sin(t*.22)*.18;
+  mainGem.rotation.x=0.06+Math.sin(t*.14)*.04;
+  mainGem.position.y=0.2+Math.sin(t*.52)*.08;
+  haloMesh.rotation.y=mainGem.rotation.y+0.15;
+  haloMesh.rotation.x=mainGem.rotation.x;
+  haloMesh.position.copy(mainGem.position);
 
-  /* Orbiting warm light */
+  /* Orbiting lights */
   ptA.position.set(Math.sin(t*.44)*4.5,Math.cos(t*.32)*2,Math.cos(t*.44)*4.5);
   ptB.position.set(Math.cos(t*.27)*5,Math.sin(t*.38)*2.2,Math.sin(t*.27)*5);
 
-  /* Mini kunais drift slowly */
-  miniKunais.forEach((m,i)=>{
-    const{sp}=m.userData;
-    m.rotation.z += sp * .006;
-    m.rotation.x += sp * .003;
-    m.position.y += Math.sin(t*sp + i*1.5) * .0012;
-  });
+  /* Floating gems drift */
+  for(var i=0;i<floaters.length;i++){
+    var fl=floaters[i];
+    fl.rotation.z+=fl.userData.sp*.005;
+    fl.rotation.y+=fl.userData.sp*.008;
+    fl.position.y=fl.userData.yo+Math.sin(t*fl.userData.sp+i*1.5)*.06;
+  }
 
-  R.render(S,C);
+  renderer.render(scene,camera);
 })();
 
-/* scroll reveal */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ── SCROLL REVEAL ──────────────────────────────── */
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting)e.target.classList.add('in');
+  });
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-/* count up */
+/* ── COUNT UP ───────────────────────────────────── */
 function countUp(el){
-  const t=parseFloat(el.dataset.to),d=parseInt(el.dataset.dec)||0,dur=1400,s=performance.now();
-  (function step(n){const p=Math.min((n-s)/dur,1),e=1-Math.pow(1-p,4);el.textContent=(t*e).toFixed(d);if(p<1)requestAnimationFrame(step);})(s);
+  var target=parseFloat(el.dataset.to);
+  var dec=parseInt(el.dataset.dec)||0;
+  var dur=1400,start=performance.now();
+  function step(now){
+    var p=Math.min((now-start)/dur,1);
+    var ease=1-Math.pow(1-p,4);
+    el.textContent=(target*ease).toFixed(dec);
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
 }
-const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){countUp(e.target);co.unobserve(e.target);}}),{threshold:.5});
-document.querySelectorAll('[data-to]').forEach(el=>co.observe(el));
+var co=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){countUp(e.target);co.unobserve(e.target);}
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-to]').forEach(function(el){co.observe(el);});
 </script>
 </body>
 </html>
